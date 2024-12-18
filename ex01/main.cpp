@@ -1,20 +1,20 @@
 #include "iter.hpp"
 #include <cstddef>
 #include <iostream>
+
+template <typename T> void myToUpper(T &p) {
+  if (p >= 'a' && p <= 'z')
+    p -= 32;
+}
 //
-// void myToUpper(char *p) {
-//   if (*p >= 'a' && *p <= 'z')
-//     *p -= 32;
-// }
-//
-// void myBZero(int *p) { *p = 0; }
+
+template <typename T> void myBZero(T &p) { p = 0; }
 //
 // int main(void) {
 //   char carr[13] = "Hello, world";
 //   int *iarr = new int[13];
 //
 //   iter<char>(carr, 13, myToUpper);
-//   iter<int>(iarr, 13, myBZero);
 //
 //   std::cout << carr << "\n";
 //   for (int i = 0; i < 13; i++)
@@ -55,12 +55,17 @@ int main() {
   int tab[] = {0, 1, 2, 3, 4};
   Awesome tab2[5];
 
-  char *tab3 = new char[13];
+  char *tab3 = new char[14];
+  iter(tab3, 14, myBZero<char>);
   myMemcpy("Hello, world!", tab3, 13);
   iter(tab, 5, print<const int>);
   iter(tab2, 5, print<Awesome>);
 
+  std::cout << tab3 << "\n";
+  iter(tab3, 14, myToUpper<char>);
   std::cout << tab3 << std::endl;
+
+  delete[] tab3;
 
   return 0;
 }
