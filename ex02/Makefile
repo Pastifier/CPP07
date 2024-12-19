@@ -13,13 +13,14 @@ RESET		=	\e[0m
 CURSIVE		=	\e[33;3m
 
 # Targets
-SRC := Array.hpp main.cpp
+SRC := main.cpp
+INCLUDE := Array.hpp
 
 
 # Rules
 all: $(NAME)
 
-$(NAME): $(SRC)
+$(NAME): $(SRC) $(INCLUDE)
 	$(CXX) -o $@ $(CXXFLAGS) $(SRC)
 	@printf "$(GREEN)Compilation successful!$(RESET)\n"
 
